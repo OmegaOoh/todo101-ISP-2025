@@ -24,9 +24,9 @@ jobs:
           docker compose -f docker-compose.yml build
       - name: Tag & Push Backend image
         run: |
-          docker tag todo101_todo-backend sirapobphasut/todo-backend:latest
+          docker tag todo101-isp-2025-todo-backend sirapobphasut/todo-backend:latest
           docker push sirapobphasut/todo-backend:latest
       - name: Tag & Push Frontend image
         run: |
-          docker tag todo101_todo-frontend sirapobphasut/todo-frontend:latest
+          docker tag todo101-isp-2025-todo-frontend sirapobphasut/todo-frontend:latest
           docker push sirapobphasut/todo-frontend:latest
