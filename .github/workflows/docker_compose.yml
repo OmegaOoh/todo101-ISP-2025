@@ -1,0 +1,32 @@
+name: Docker Compose CI
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Login Docker Hub
+        uses: docker/login_action@v2
+        with:
+          username: sirapobphasut
+          password: ${{secrets.DOCKER_TOKEN}}
+      - name: Build and tag Docker images
+        run: |
+          docker compose -f docker-compose.yml build
+      - name: Tag & Push Backend image
+        run: |
+          docker tag todo101-todo-backend sirapobphasut/todo-backend:latest
+          docker push sirapobphasut/todo-backend:latest
+      - name: Tag & Push Frontend image
+        run: |
+          docker tag todo101-todo-frontend sirapobphasut/todo-frontend:latest
+          docker push sirapobphasut/todo-frontend:latest
